@@ -3,7 +3,6 @@
 # [Mario Maksimovic] Build/Run docker container for this project
 # -----------------------------------------------------------------------------
 
-VERSION=0.0.1
 SUBJECT=f478fbd8-4ca7-4e5f-bab4-4dc12d57d3a4
 
 # --- Locks -------------------------------------------------------------------
@@ -34,7 +33,10 @@ docker pull php:latest
 # docker exec -it redis /bin/sh -c "redis-cli config set notify-keyspace-events KEA"
 
 # Start mysql db container
+mkdir -p mysql
+
 docker run --name lara-mysql --network=lara-network \
+    --user $(id -u $USER):$(id -g $GROUP) \
     -v $SRC/mysql:/var/lib/mysql \
     -e MYSQL_DATABASE=laravel \
     -e MYSQL_USER=laravel \

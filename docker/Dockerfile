@@ -1,28 +1,24 @@
 FROM php:latest AS php-latest
 
-LABEL maintainer=""
+LABEL maintainer="Mario Maksimovic <maki.makso@gmail.com>"
 LABEL description="Development environment (Debian based)."
 
 # General system staff
-RUN apt update -y && \
-    apt install -my \
+RUN apt update && apt upgrade -y && apt autoremove -y && apt install -my \
     curl \
     git \
     zip \
     locales \
     tmux \
+    wget \
     libcurl4-openssl-dev \
     libedit-dev \
     libssl-dev \
     libxml2-dev \
     xz-utils \
     libsqlite3-dev \
-    sqlite3 \
-    git \
-    curl \
     vim \
     nano \
-    net-tools \
     iputils-ping
 
 RUN echo 'Europe/Skopje' > /etc/timezone
@@ -57,7 +53,6 @@ RUN curl -s http://getcomposer.org/installer | php && \
 
 # Source the bash
 RUN . ~/.bashrc
-
 
 ARG user
 USER $user
