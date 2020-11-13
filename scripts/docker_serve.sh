@@ -25,8 +25,12 @@ IMIN="$(cd "$(dirname "$0")" && pwd)"
 
 # --- Body --------------------------------------------------------------------
 
-# serving laravel app
 cd $1
+
+# Installing dependencies from lock file (including require-dev)
+composer install
+
+# Serving laravel app
 php artisan serve --host 0.0.0.0
 
 exit 0
