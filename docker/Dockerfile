@@ -3,7 +3,7 @@ FROM php:latest AS php-latest
 LABEL maintainer="Mario Maksimovic <maki.makso@gmail.com>"
 LABEL description="Development environment (Debian based)."
 
-# General system staff
+# General system stuff
 RUN apt update && apt upgrade -y && apt autoremove -y && apt install -my \
     curl \
     git \
@@ -25,6 +25,9 @@ RUN echo 'Europe/Skopje' > /etc/timezone
 ENV TZ=Europe/Skopje
 RUN echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
 RUN locale-gen
+
+# Enabling php extensions
+RUN docker-php-ext-install pdo_mysql
 
 # Setup normal user. If not passed as build argument use 'devel' as default
 ARG user=devel

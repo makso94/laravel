@@ -30,6 +30,9 @@ cd $1
 # Installing dependencies from lock file (including require-dev)
 composer install
 
+# Running migrations
+php artisan migrate
+
 # Serving laravel app
 php artisan serve --host 0.0.0.0
 
