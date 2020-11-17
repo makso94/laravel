@@ -27,7 +27,7 @@ RUN echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
 RUN locale-gen
 
 # Enabling php extensions
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql intl
 
 # Setup normal user. If not passed as build argument use 'devel' as default
 ARG user=devel
