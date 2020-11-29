@@ -3,6 +3,9 @@ FROM php:latest AS php-latest
 LABEL maintainer="Mario Maksimovic <maki.makso@gmail.com>"
 LABEL description="Development environment (Debian based)."
 
+# Adding an alternate nodeJS repository
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash 
+
 # General system stuff
 RUN apt update && apt upgrade -y && apt autoremove -y && apt install -my \
     curl \
@@ -19,7 +22,8 @@ RUN apt update && apt upgrade -y && apt autoremove -y && apt install -my \
     libsqlite3-dev \
     vim \
     nano \
-    iputils-ping
+    iputils-ping\
+    nodejs
 
 RUN echo 'Europe/Skopje' > /etc/timezone
 ENV TZ=Europe/Skopje
@@ -45,9 +49,6 @@ FROM php-latest AS lara
 LABEL description="Laravel backend development environment (PHP based)."
 
 USER root
-#####################################
-# Composer:
-#####################################
 
 # Install composer and add its bin to the PATH.
 RUN curl -s http://getcomposer.org/installer | php && \

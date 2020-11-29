@@ -27,6 +27,9 @@ IMIN="$(cd "$(dirname "$0")" && pwd)"
 
 cd $1
 
+# Installing npm dependencies from lock file
+npm install
+
 # Installing dependencies from lock file (including require-dev)
 composer install
 
