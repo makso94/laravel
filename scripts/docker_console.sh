@@ -38,6 +38,7 @@ mkdir -p mysql
 docker run --name lara-mysql --network=lara-network \
     --user $(id -u $USER):$(id -g $GROUP) \
     -v $SRC/mysql:/var/lib/mysql \
+    -v $SRC/etc/mysql:/etc/mysql/conf.d \
     -e MYSQL_DATABASE=laravel \
     -e MYSQL_USER=laravel \
     -e MYSQL_PASSWORD=laravel123 \
@@ -49,8 +50,8 @@ docker run --name lara-mysql --network=lara-network \
 docker run --name lara-nginx -p 80:80 -p 443:443 \
     --network=lara-network \
     -v /tmp:/tmp \
-    -v $(pwd)/etc/docker_nginx_dev.conf:/etc/nginx/conf.d/default.conf \
-    -v $(pwd)/etc/ssl:/etc/nginx/ssl \
+    -v $(pwd)/etc/nginx/docker_nginx_dev.conf:/etc/nginx/conf.d/default.conf \
+    -v $(pwd)/etc/nginx/ssl:/etc/nginx/ssl \
     -d nginx:alpine sh -c "while true; do nginx -g 'daemon off;'; sleep 1; done"
 
 # Build project image

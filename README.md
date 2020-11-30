@@ -19,3 +19,9 @@ example:
 
 Then you can serve this project with following command:
     ./scripts/docker_serve.sh some_project_name
+
+
+You can monitor mysql general log with the following command
+
+tail -f mysql/general_log.log
+
